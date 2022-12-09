@@ -9,6 +9,7 @@ import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-nav
 
 import { COLORS } from '../constants/colors';
 import { TEXT } from '../constants/text';
+import { HomeScreen } from '../features/home';
 import { BottomTabNavigatorType, BottomTabScreenNames } from '../types/navigation';
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorType>();
@@ -27,6 +28,8 @@ export const BottomTabNavigator = () => {
       borderTopWidth: 0,
       elevation: 0,
       height: 70 + bottom,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
     },
     tabBarLabelStyle: {
       color: COLORS.white,
@@ -52,7 +55,7 @@ export const BottomTabNavigator = () => {
           ),
         }}
         name={BottomTabScreenNames.home}
-        component={MockScreen}
+        component={HomeScreen}
       />
       <Tab.Screen
         options={{

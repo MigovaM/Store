@@ -6,4 +6,7 @@ export const TEXT = {
     trips: 'Поездки',
     market: 'Маркет',
   },
+  home: {
+    subscriptionEnd: 'Подписка до',
+  },
 };
