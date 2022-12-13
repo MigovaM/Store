@@ -30,7 +30,7 @@ export const Widget = (props: WidgetPropsType) => {
   const fuelPercentage = widget.fuel ?  100 - widget.fuel?.fuelLack * 100 / widget.fuel?.totalFuel : 0;
 
   return (
-    <View style={{ ...containerStyle, ...styles.container }}>
+    <View style={[containerStyle, styles.container]}>
       <GradientView colors={colors ?? defaultGradient} style={styles.gradient}>
         <View>
           <View style={styles.titleContainer}>

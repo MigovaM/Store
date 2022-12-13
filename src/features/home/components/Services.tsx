@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, FlatList, ScrollView, StyleSheet, View, ViewStyle } from 'react-native';
+import { Dimensions, FlatList, ListRenderItemInfo, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Map } from '../../../components/Map';
@@ -24,8 +24,12 @@ export const Services = (props: ServicesPropsType) => {
 
   const mapContainerStyle = { marginBottom: bottom + 75 };
 
-  const renderItem = (item: Service, styles: ViewStyle, colors?: string[]) => (
-    <Widget widget={item} containerStyle={styles} colors={colors} />
+  const renderMainItem = ({ item, index }: ListRenderItemInfo<Service>) => (
+    <Widget key={item.type} widget={item} containerStyle={styles.mainWidget} colors={widgetColors[index]} />
+  );
+
+  const renderCommonItem = ({ item }: ListRenderItemInfo<Service>) => (
+    <Widget key={item.type} widget={item} containerStyle={styles.commonWidget} />
   );
 
   return(
@@ -34,14 +38,14 @@ export const Services = (props: ServicesPropsType) => {
         horizontal={true}
         data={mainWidgets}
         scrollEnabled={false}
-        renderItem={({ item, index }) => renderItem(item, styles.mainWidget, widgetColors[index])}
+        renderItem={renderMainItem}
         showsHorizontalScrollIndicator={false}
       />
       <FlatList
         horizontal={true}
         data={commonWidgets}
         scrollEnabled={false}
-        renderItem={({ item }) => renderItem(item, styles.commonWidget)}
+        renderItem={renderCommonItem}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
       />

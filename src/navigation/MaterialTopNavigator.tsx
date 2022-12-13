@@ -57,7 +57,7 @@ export const MaterialTopNavigator = (props: MaterialTopNavigatorProps) => {
   const { activeCarIndex } = props;
 
   return (
-    <Tab.Navigator screenOptions={getScreenOptions}>
+    <Tab.Navigator initialRouteName={MaterialTopNavigatorScreenNames.services} screenOptions={getScreenOptions}>
       <Tab.Screen name={MaterialTopNavigatorScreenNames.services}>
         {props => <Services {...props} activeCarIndex={activeCarIndex} />}
       </Tab.Screen>
