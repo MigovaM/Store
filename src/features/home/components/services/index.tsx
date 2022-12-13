@@ -1,12 +1,21 @@
 import React from 'react';
-import { Dimensions, FlatList, ListRenderItemInfo, ScrollView, StyleSheet, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  Dimensions,
+  FlatList,
+  ListRenderItemInfo,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 
-import { Map } from '../../../components/Map';
-import { Widget } from '../../../components/Widget';
+import { Map } from '../../../../components/Map';
+import { Widget } from '../../../../components/Widget';
 
-import { COLORS } from '../../../constants/colors';
-import { MOCK_CARS, Service } from '../../../constants/mock';
+import { COLORS } from '../../../../constants/colors';
+import { Service } from '../../../../constants/mock';
+
+import { useServices } from './useServices';
 
 type ServicesPropsType = {
     activeCarIndex: number
@@ -17,12 +26,13 @@ const widgetColors = [[COLORS.white, COLORS.heartOfIce], [COLORS.white, COLORS.t
 
 export const Services = (props: ServicesPropsType) => {
   const { activeCarIndex } = props;
-  const { bottom } = useSafeAreaInsets();
-
-  const mainWidgets = MOCK_CARS[activeCarIndex].services.slice(0, 2);
-  const commonWidgets = MOCK_CARS[activeCarIndex].services.slice(2);
-
-  const mapContainerStyle = { marginBottom: bottom + 75 };
+  const {
+    isLoading,
+    onRefresh,
+    mainWidgets,
+    commonWidgets,
+    mapContainerStyle,
+  } = useServices(activeCarIndex);
 
   const renderMainItem = ({ item, index }: ListRenderItemInfo<Service>) => (
     <Widget key={item.type} widget={item} containerStyle={styles.mainWidget} colors={widgetColors[index]} />
@@ -33,7 +43,16 @@ export const Services = (props: ServicesPropsType) => {
   );
 
   return(
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={isLoading}
+          onRefresh={onRefresh}
+        />
+      }
+    >
       <FlatList
         horizontal={true}
         data={mainWidgets}

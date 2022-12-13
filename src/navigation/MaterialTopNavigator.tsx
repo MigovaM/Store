@@ -4,7 +4,7 @@ import { Route, StyleSheet, Text, View } from 'react-native';
 import { createMaterialTopTabNavigator, MaterialTopTabNavigationOptions } from '@react-navigation/material-top-tabs';
 
 import { MockScreen } from '../components/MockScreen';
-import { Services } from '../features/home/components/Services';
+import { Services } from '../features/home/components/services';
 
 import { COLORS } from '../constants/colors';
 import { TEXT } from '../constants/text';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import CustomStatusBar from '../../components/CustomStatusBar';
-import { MainHeader } from './components/MainHeader';
+import { MainHeader } from './components/mainHeader';
 
 import { COLORS } from '../../constants/colors';
 import { MaterialTopNavigator } from '../../navigation/MaterialTopNavigator';
