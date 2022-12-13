@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import PaginationDot from 'react-native-animated-pagination-dot';
 import Carousel from 'react-native-reanimated-carousel';
@@ -9,14 +9,20 @@ import { GradientView } from '../../../components/GradientView';
 import { COLORS } from '../../../constants/colors';
 import { Car, MOCK_AVATAR, MOCK_CARS } from '../../../constants/mock';
 import { TEXT } from '../../../constants/text';
+import { scaleFontSize } from '../../../units/scaleFontSize';
 
 const width = Dimensions.get('screen').width;
-const SLIDE_HEIGHT = 180;
+const SLIDE_HEIGHT = 160;
 
-export const MainHeader = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+type MainHeaderPropsType = {
+  activeCarIndex: number,
+  setCarActiveIndex: (value: number) => void
+}
 
-  const onProgressChange = (_: number, absoluteProgress: number) => setActiveIndex(Math.round(absoluteProgress));
+export const MainHeader = (props: MainHeaderPropsType) => {
+  const { activeCarIndex, setCarActiveIndex } = props;
+
+  const onProgressChange = (_: number, absoluteProgress: number) => setCarActiveIndex(Math.round(absoluteProgress));
 
   const renderItem = ({ item }: CarouselRenderItemInfo<Car>) => (
     <View style={styles.slide}>
@@ -35,40 +41,46 @@ export const MainHeader = () => {
   );
 
   return (
-    <GradientView colors={[COLORS.seaMariner, COLORS.dark]} style={styles.container}>
-      <Carousel
-        width={width}
-        height={SLIDE_HEIGHT}
-        data={MOCK_CARS}
-        loop={false}
-        onProgressChange={onProgressChange}
-        renderItem={renderItem}
-      />
-      <PaginationDot
-        activeDotColor={COLORS.white}
-        inactiveDotColor={COLORS.wallStreet}
-        curPage={activeIndex}
-        maxPage={MOCK_CARS.length}
-      />
-    </GradientView>
+    <View style={styles.container}>
+      <GradientView colors={[COLORS.seaMariner, COLORS.dark]} style={styles.gradient}>
+        <Carousel
+          width={width}
+          height={SLIDE_HEIGHT}
+          data={MOCK_CARS}
+          loop={false}
+          onProgressChange={onProgressChange}
+          renderItem={renderItem}
+        />
+        <PaginationDot
+          activeDotColor={COLORS.white}
+          inactiveDotColor={COLORS.wallStreet}
+          curPage={activeCarIndex}
+          maxPage={MOCK_CARS.length}
+        />
+      </GradientView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    paddingBottom: 20,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
-    backgroundColor: COLORS.dark,
     shadowColor: COLORS.dark,
     shadowOffset: {
       width: 0,
-      height: 10,
+      height: 0,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 5,
+    shadowRadius: 7,
     elevation: 4,
+    marginBottom: 10,
+  },
+  gradient: {
+    alignItems: 'center',
+    paddingBottom: 10,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
   },
   slide: {
     alignItems: 'center',
@@ -76,7 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    fontSize: 28,
+    fontSize: scaleFontSize(28),
     letterSpacing: 3,
     color: COLORS.wallStreet,
   },
@@ -91,21 +103,23 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.wallStreet,
   },
   subscriptionText: {
-    fontSize: 12,
+    fontSize: scaleFontSize(12),
     color: COLORS.white,
   },
   auto: {
     alignItems: 'center',
+    minWidth: 200,
     paddingVertical: 7,
     paddingHorizontal: 12,
     borderRadius: 30,
     backgroundColor: COLORS.antarcticDeep,
   },
   model: {
-    fontSize: 28,
+    fontSize: scaleFontSize(28),
     color: COLORS.white,
   },
   stateNumber: {
+    fontSize: scaleFontSize(14),
     color: COLORS.wallStreet,
   },
   avatarContainer: {

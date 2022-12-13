@@ -3,7 +3,13 @@ export const COLORS = {
   dark: '#202121',
   whiteOpaque: 'rgba(255, 255, 255, 0.5)',
   darkOpaque: 'rgba(33, 33, 33, 0.8)',
+  linkWater: '#c7cdd7',
   wallStreet: '#646b74',
   seaMariner: '#444b53',
   antarcticDeep: '#353a3e',
+  heartOfIce: '#e5eff5',
+  touchOfMint: '#f2faee',
+  embarrassed: '#e77798',
+  approachingDusk: '#8894a8',
+  cloudBreak: '#f5f0fc',
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet,Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -7,118 +6,66 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { MockScreen } from '../components/MockScreen';
+
 import { COLORS } from '../constants/colors';
 import { TEXT } from '../constants/text';
 import { HomeScreen } from '../features/home';
-import { BottomTabNavigatorType, BottomTabScreenNames } from '../types/navigation';
+import { bottomTabIcons, BottomTabNavigatorType, BottomTabScreenNames } from '../types/navigation';
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorType>();
 
-const MockScreen = () => <></>;
+const getNavigatorOptions = (bottomInset: number): BottomTabNavigationOptions => ({
+  headerShown: false,
+  tabBarShowLabel: true,
+  tabBarActiveTintColor: COLORS.white,
+  tabBarInactiveTintColor: COLORS.whiteOpaque,
+  tabBarStyle: {
+    position: 'absolute',
+    backgroundColor: COLORS.darkOpaque,
+    elevation: 0,
+    height: 70 + bottomInset,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingBottom: 10 + bottomInset,
+  },
+});
+
+const getScreenOptions = (Icon: typeof React.Component, name: BottomTabScreenNames ): BottomTabNavigationOptions => ({
+  tabBarIcon: ({ color }) => <Icon name={bottomTabIcons[name]} size={30} color={color} />,
+  tabBarLabel: TEXT.bottomTab[name],
+});
 
 export const BottomTabNavigator = () => {
   const { bottom } = useSafeAreaInsets();
 
-  const screenOptions: BottomTabNavigationOptions = {
-    headerShown: false,
-    tabBarShowLabel: false,
-    tabBarStyle: {
-      position: 'absolute',
-      backgroundColor: COLORS.darkOpaque,
-      borderTopWidth: 0,
-      elevation: 0,
-      height: 70 + bottom,
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-    },
-    tabBarLabelStyle: {
-      color: COLORS.white,
-    },
-    tabBarIconStyle: {
-      backgroundColor: 'red',
-    },
-  };
-
-  const getColor = (isActive: boolean) => isActive ? COLORS.white : COLORS.whiteOpaque;
-
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
+    <Tab.Navigator screenOptions={() => getNavigatorOptions(bottom)}>
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <>
-              <AntDesignIcon name="home" size={30} color={getColor(focused)} />
-              <Text style={[styles.label, { color: getColor(focused) }]}>
-                {TEXT.bottomTab[BottomTabScreenNames.home]}
-              </Text>
-            </>
-          ),
-        }}
+        options={() => getScreenOptions(AntDesignIcon, BottomTabScreenNames.home)}
         name={BottomTabScreenNames.home}
         component={HomeScreen}
       />
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <>
-              <AntDesignIcon name="car" size={30} color={getColor(focused)} />
-              <Text style={[styles.label, { color: getColor(focused) }]}>
-                {TEXT.bottomTab[BottomTabScreenNames.auto]}
-              </Text>
-            </>
-          ),
-        }}
+        options={() => getScreenOptions(AntDesignIcon, BottomTabScreenNames.auto)}
         name={BottomTabScreenNames.auto}
         component={MockScreen}
       />
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <>
-              <AntDesignIcon name="appstore-o" size={30} color={getColor(focused)} />
-              <Text style={[styles.label, { color: getColor(focused) }]}>
-                {TEXT.bottomTab[BottomTabScreenNames.services]}
-              </Text>
-            </>
-          ),
-        }}
+        options={() => getScreenOptions(AntDesignIcon, BottomTabScreenNames.services)}
         name={BottomTabScreenNames.services}
         component={MockScreen}
       />
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <>
-              <FeatherIcon name="compass" size={30} color={getColor(focused)} />
-              <Text style={[styles.label, { color: getColor(focused) }]}>
-                {TEXT.bottomTab[BottomTabScreenNames.trips]}
-              </Text>
-            </>
-          ),
-        }}
+        options={() => getScreenOptions(FeatherIcon, BottomTabScreenNames.trips)}
         name={BottomTabScreenNames.trips}
         component={MockScreen}
       />
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <>
-              <MaterialIcon name="storefront" size={30} color={getColor(focused)} />
-              <Text style={[styles.label, { color: getColor(focused) }]}>
-                {TEXT.bottomTab[BottomTabScreenNames.market]}
-              </Text>
-            </>
-          ),
-        }}
+        options={() => getScreenOptions(MaterialIcon, BottomTabScreenNames.market)}
         name={BottomTabScreenNames.market}
         component={MockScreen}
       />
     </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  label: {
-    fontSize: 12,
-  },
-});

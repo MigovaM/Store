@@ -7,7 +7,13 @@ export enum BottomTabScreenNames {
 }
 
 export enum RootNavigatorScreenNames {
-    bottomTab = 'BottomTab',
+    bottomTab = 'bottomTab',
+}
+
+export enum MaterialTopNavigatorScreenNames {
+    services = 'services',
+    subscription = 'subscription',
+    marketplace = 'marketplace'
 }
 
 export type BottomTabNavigatorType = {
@@ -21,3 +27,17 @@ export type BottomTabNavigatorType = {
 export type RootNavigatorType = {
     [RootNavigatorScreenNames.bottomTab]: undefined,
 }
+
+export type MaterialTopNavigatorType = {
+    [MaterialTopNavigatorScreenNames.services]: undefined,
+    [MaterialTopNavigatorScreenNames.subscription]: undefined,
+    [MaterialTopNavigatorScreenNames.marketplace]: undefined,
+}
+
+export const bottomTabIcons = {
+  [BottomTabScreenNames.home]: 'home',
+  [BottomTabScreenNames.auto]: 'car',
+  [BottomTabScreenNames.services]: 'appstore-o',
+  [BottomTabScreenNames.trips]: 'compass',
+  [BottomTabScreenNames.market]: 'storefront',
+};

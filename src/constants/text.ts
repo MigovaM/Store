@@ -1,3 +1,5 @@
+import { Services } from '../types/services';
+
 export const TEXT = {
   bottomTab: {
     home: 'Главная',
@@ -8,5 +10,17 @@ export const TEXT = {
   },
   home: {
     subscriptionEnd: 'Подписка до',
+  },
+  materialTop: {
+    services: 'Услуги',
+    subscription: 'Подписка',
+    marketplace: 'Маркетплейс',
+  },
+  services: {
+    [Services.refuel]: 'Заправить',
+    [Services.maintenance]: 'Техобслуживание',
+    [Services.fines]: 'Штрафы',
+    [Services.parking]: 'Паркинг',
+    [Services.gasStation]: 'АЗС',
   },
 };
