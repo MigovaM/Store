@@ -4,7 +4,7 @@ import PaginationDot from 'react-native-animated-pagination-dot';
 import Carousel from 'react-native-reanimated-carousel';
 import { CarouselRenderItemInfo } from 'react-native-reanimated-carousel/src/types';
 
-import { GradientView } from '../../../../components/GradientView';
+import { Header } from '../../../../components/Header';
 
 import { COLORS } from '../../../../constants/colors';
 import { Car, MOCK_AVATAR, MOCK_CARS } from '../../../../constants/mock';
@@ -41,47 +41,26 @@ export const MainHeader = (props: MainHeaderPropsType) => {
   );
 
   return (
-    <View style={styles.container}>
-      <GradientView colors={[COLORS.seaMariner, COLORS.dark]} style={styles.gradient}>
-        <Carousel
-          width={width}
-          height={SLIDE_HEIGHT}
-          data={MOCK_CARS}
-          loop={false}
-          onProgressChange={onProgressChange}
-          renderItem={renderItem}
-        />
-        <PaginationDot
-          activeDotColor={COLORS.white}
-          inactiveDotColor={COLORS.wallStreet}
-          curPage={activeCarIndex}
-          maxPage={MOCK_CARS.length}
-        />
-      </GradientView>
-    </View>
+    <Header>
+      <Carousel
+        width={width}
+        height={SLIDE_HEIGHT}
+        data={MOCK_CARS}
+        loop={false}
+        onProgressChange={onProgressChange}
+        renderItem={renderItem}
+      />
+      <PaginationDot
+        activeDotColor={COLORS.white}
+        inactiveDotColor={COLORS.wallStreet}
+        curPage={activeCarIndex}
+        maxPage={MOCK_CARS.length}
+      />
+    </Header>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    shadowColor: COLORS.dark,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 7,
-    elevation: 4,
-    marginBottom: 10,
-  },
-  gradient: {
-    alignItems: 'center',
-    paddingBottom: 10,
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
-  },
   slide: {
     alignItems: 'center',
     flex: 1,

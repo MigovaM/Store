@@ -10,6 +10,7 @@ import { MockScreen } from '../components/MockScreen';
 
 import { COLORS } from '../constants/colors';
 import { TEXT } from '../constants/text';
+import { AutoScreen } from '../features/auto';
 import { HomeScreen } from '../features/home';
 import { bottomTabIcons, BottomTabNavigatorType, BottomTabScreenNames } from '../types/navigation';
 
@@ -49,7 +50,8 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         options={() => getScreenOptions(AntDesignIcon, BottomTabScreenNames.auto)}
         name={BottomTabScreenNames.auto}
-        component={MockScreen}
+        component={AutoScreen}
+        initialParams={{ indexAuto: null }}
       />
       <Tab.Screen
         options={() => getScreenOptions(AntDesignIcon, BottomTabScreenNames.services)}

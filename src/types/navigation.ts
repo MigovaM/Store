@@ -1,3 +1,7 @@
+import { NativeStackNavigationProp } from 'react-native-screens/native-stack';
+
+import { RouteProp } from '@react-navigation/native';
+
 export enum BottomTabScreenNames {
     home = 'home',
     auto = 'auto',
@@ -18,7 +22,7 @@ export enum MaterialTopNavigatorScreenNames {
 
 export type BottomTabNavigatorType = {
     [BottomTabScreenNames.home]: undefined,
-    [BottomTabScreenNames.auto]: undefined,
+    [BottomTabScreenNames.auto]: { indexAuto: number | null },
     [BottomTabScreenNames.services]: undefined,
     [BottomTabScreenNames.trips]: undefined,
     [BottomTabScreenNames.market]: undefined,
@@ -41,3 +45,9 @@ export const bottomTabIcons = {
   [BottomTabScreenNames.trips]: 'compass',
   [BottomTabScreenNames.market]: 'storefront',
 };
+
+export type HomeNavigationProp = NativeStackNavigationProp<BottomTabNavigatorType, BottomTabScreenNames.home>
+export type AutoNavigationProp = NativeStackNavigationProp<BottomTabNavigatorType, BottomTabScreenNames.auto>
+
+export type AutoRouteType = RouteProp<BottomTabNavigatorType, BottomTabScreenNames.auto>;
+

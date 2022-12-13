@@ -25,21 +25,32 @@ const width = Dimensions.get('screen').width;
 const widgetColors = [[COLORS.white, COLORS.heartOfIce], [COLORS.white, COLORS.touchOfMint]];
 
 export const Services = (props: ServicesPropsType) => {
-  const { activeCarIndex } = props;
   const {
-    isLoading,
+    goToAuto,
     onRefresh,
+    isLoading,
     mainWidgets,
     commonWidgets,
     mapContainerStyle,
-  } = useServices(activeCarIndex);
+  } = useServices(props.activeCarIndex);
 
   const renderMainItem = ({ item, index }: ListRenderItemInfo<Service>) => (
-    <Widget key={item.type} widget={item} containerStyle={styles.mainWidget} colors={widgetColors[index]} />
+    <Widget
+      key={item.type}
+      widget={item}
+      containerStyle={styles.mainWidget}
+      colors={widgetColors[index]}
+      goToAuto={goToAuto}
+    />
   );
 
   const renderCommonItem = ({ item }: ListRenderItemInfo<Service>) => (
-    <Widget key={item.type} widget={item} containerStyle={styles.commonWidget} />
+    <Widget
+      key={item.type}
+      widget={item}
+      containerStyle={styles.commonWidget}
+      goToAuto={goToAuto}
+    />
   );
 
   return(

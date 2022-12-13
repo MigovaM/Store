@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { COLORS } from '../constants/colors';
@@ -15,13 +15,14 @@ import { Indicator } from './Indicator';
 type WidgetPropsType = {
     containerStyle: ViewStyle,
     widget: Service,
+    goToAuto: () => void,
     colors?: string[]
 }
 
 const defaultGradient = [COLORS.white, COLORS.white];
 
 export const Widget = (props: WidgetPropsType) => {
-  const { containerStyle, widget, colors } = props;
+  const { containerStyle, widget, colors, goToAuto } = props;
 
   const isFuel = !!widget.fuel;
   const isWarning = !!widget.warning;
@@ -30,7 +31,7 @@ export const Widget = (props: WidgetPropsType) => {
   const fuelPercentage = widget.fuel ?  100 - widget.fuel?.fuelLack * 100 / widget.fuel?.totalFuel : 0;
 
   return (
-    <View style={[containerStyle, styles.container]}>
+    <TouchableOpacity style={[containerStyle, styles.container]} onPress={goToAuto}>
       <GradientView colors={colors ?? defaultGradient} style={styles.gradient}>
         <View>
           <View style={styles.titleContainer}>
@@ -66,7 +67,7 @@ export const Widget = (props: WidgetPropsType) => {
           />
         </View>
       </GradientView>
-    </View>
+    </TouchableOpacity>
   );
 };
 

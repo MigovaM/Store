@@ -23,4 +23,9 @@ export const TEXT = {
     [Services.parking]: 'Паркинг',
     [Services.gasStation]: 'АЗС',
   },
+  auto: {
+    cars: 'Автопарк',
+    subscription: 'Подписка',
+    info: 'Информация по услугам',
+  },
 };
