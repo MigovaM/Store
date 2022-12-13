@@ -4,12 +4,12 @@ import PaginationDot from 'react-native-animated-pagination-dot';
 import Carousel from 'react-native-reanimated-carousel';
 import { CarouselRenderItemInfo } from 'react-native-reanimated-carousel/src/types';
 
-import { GradientView } from '../../../components/GradientView';
+import { GradientView } from '../../../../components/GradientView';
 
-import { COLORS } from '../../../constants/colors';
-import { Car, MOCK_AVATAR, MOCK_CARS } from '../../../constants/mock';
-import { TEXT } from '../../../constants/text';
-import { scaleFontSize } from '../../../units/scaleFontSize';
+import { COLORS } from '../../../../constants/colors';
+import { Car, MOCK_AVATAR, MOCK_CARS } from '../../../../constants/mock';
+import { TEXT } from '../../../../constants/text';
+import { scaleFontSize } from '../../../../units/scaleFontSize';
 
 const width = Dimensions.get('screen').width;
 const SLIDE_HEIGHT = 160;
