@@ -34,7 +34,7 @@ export const AutoScreen = () => {
   };
 
   const renderItem = ({ item, index }: ListRenderItemInfo<Car>) => (
-    <Auto key={item.stateNumber} auto={item} isActive={index === activeCarIndex} onPress={() => onItemPress(index)} />
+    <Auto key={item.id} auto={item} isActive={index === activeCarIndex} onPress={() => onItemPress(index)} />
   );
 
   return (
