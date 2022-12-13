@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, ListRenderItemInfo, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
 import { COLORS } from '../../../../constants/colors';
-import { Car } from '../../../../constants/mock';
+import { Car, Service } from '../../../../constants/mock';
 import { TEXT } from '../../../../constants/text';
 import { Services } from '../../../../types/services';
 import { scaleFontSize } from '../../../../units/scaleFontSize';
@@ -16,6 +16,13 @@ type AutoPropsType = {
 
 export const Auto = (props: AutoPropsType) => {
   const { auto, isActive, onPress } = props;
+
+  const renderItem = ({ item }: ListRenderItemInfo<Service>) => (
+    <View key={item.type} style={styles.service}>
+      <Text style={styles.serviceText}>{TEXT.services[item.type as Services]}:</Text>
+      <Text style={styles.serviceText}>{item.info}</Text>
+    </View>
+  );
 
   return (
     <View style={styles.auto}>
@@ -34,15 +41,7 @@ export const Auto = (props: AutoPropsType) => {
             {TEXT.auto.subscription}: {auto.subscription.start} - {auto.subscription.end}
           </Text>
           <Text style={styles.infoTitle}>{TEXT.auto.info}:</Text>
-          {
-            auto.services.map(service => (
-              <View key={service.type} style={styles.service}>
-                <Text style={styles.serviceText}>{TEXT.services[service.type as Services]}:</Text>
-                <Text style={styles.serviceText}>{service.info}</Text>
-              </View>
-            ),
-            )
-          }
+          <FlatList data={auto.services} renderItem={renderItem} />
         </>
       )}
     </View>

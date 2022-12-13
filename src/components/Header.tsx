@@ -10,13 +10,15 @@ type HomePropsType = {
     children: React.ReactNode
 }
 
+const colors = [COLORS.seaMariner, COLORS.dark];
+
 export const Header = (props: HomePropsType) => {
-  const { children } =props;
+  const { children } = props;
 
   return (
     <View style={[styles.container]}>
       <CustomStatusBar backgroundStyle={styles.backgroundStyle} barStyle={'light-content'} />
-      <GradientView colors={[COLORS.seaMariner, COLORS.dark]} style={styles.gradient}>
+      <GradientView colors={colors} style={styles.gradient}>
         {children}
       </GradientView>
     </View>

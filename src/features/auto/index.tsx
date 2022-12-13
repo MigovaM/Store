@@ -21,7 +21,7 @@ export const AutoScreen = () => {
 
   useEffect(() => {
     setActiveCarIndex(route.params.indexAuto);
-  }, [route.params.indexAuto]);
+  }, [route.params]);
 
   useEffect(() => {
     if (!isFocused) {
@@ -34,7 +34,7 @@ export const AutoScreen = () => {
   };
 
   const renderItem = ({ item, index }: ListRenderItemInfo<Car>) => (
-    <Auto auto={item} isActive={index === activeCarIndex} onPress={() => onItemPress(index)} />
+    <Auto key={item.stateNumber} auto={item} isActive={index === activeCarIndex} onPress={() => onItemPress(index)} />
   );
 
   return (
