@@ -25,7 +25,7 @@ export const MainHeader = (props: MainHeaderPropsType) => {
   const onProgressChange = (_: number, absoluteProgress: number) => setCarActiveIndex(Math.round(absoluteProgress));
 
   const renderItem = ({ item }: CarouselRenderItemInfo<Car>) => (
-    <View style={styles.slide}>
+    <View key={item.id} style={styles.slide}>
       <Text style={styles.logo}>TES</Text>
       <View style={styles.subscriptionContainer}>
         <Text style={styles.subscriptionText}>{TEXT.home.subscriptionEnd} {item.subscription.end}</Text>

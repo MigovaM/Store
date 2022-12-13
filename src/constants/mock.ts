@@ -21,6 +21,7 @@ export type Service = {
 }
 
 export type Car =  {
+  id: string,
   model: string,
   subscription: {
     start: string,
@@ -32,6 +33,7 @@ export type Car =  {
 
 export const MOCK_CARS: Car[] = [
   {
+    id: '1',
     model: 'Genesis G70',
     subscription: {
       start: '22.12.21',
@@ -79,6 +81,7 @@ export const MOCK_CARS: Car[] = [
     ],
   },
   {
+    id: '2',
     model: 'Genesis G90',
     subscription: {
       start: '22.01.21',
@@ -126,6 +129,7 @@ export const MOCK_CARS: Car[] = [
     ],
   },
   {
+    id: '3',
     model: 'Audi A4',
     subscription: {
       start: '11.03.21',
@@ -173,6 +177,7 @@ export const MOCK_CARS: Car[] = [
     ],
   },
   {
+    id: '4',
     model: 'Ford Fiesta',
     subscription: {
       start: '22.02.21',
@@ -219,6 +224,7 @@ export const MOCK_CARS: Car[] = [
     ],
   },
   {
+    id: '5',
     model: 'Lexus GS',
     subscription: {
       start: '22.01.22',
