@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useNavigation } from '@react-navigation/native';
+
 import { MOCK_CARS } from '../../../../constants/mock';
+import { BottomTabScreenNames, HomeNavigationProp } from '../../../../types/navigation';
 
 enum Refreshing {
     loading,
@@ -11,7 +14,8 @@ enum Refreshing {
 
 export const useServices = (activeCarIndex: number) => {
   const { bottom } = useSafeAreaInsets();
-  const [refreshing, setRefreshing] = useState(Refreshing.default);
+  const navigation = useNavigation<HomeNavigationProp>();
+  const [refreshing, setRefreshing] = useState<Refreshing>(Refreshing.default);
 
   const mainWidgets = MOCK_CARS[activeCarIndex].services.slice(0, 2);
   const commonWidgets = MOCK_CARS[activeCarIndex].services.slice(2);
@@ -36,7 +40,12 @@ export const useServices = (activeCarIndex: number) => {
     }
   };
 
+  const goToAuto = () => {
+    navigation.navigate(BottomTabScreenNames.auto, { indexAuto: activeCarIndex });
+  };
+
   return {
+    goToAuto,
     onRefresh,
     isLoading,
     mainWidgets,
